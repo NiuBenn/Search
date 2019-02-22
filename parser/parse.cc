@@ -1,7 +1,7 @@
 #include"parse.hpp"
 
 std::string g_input_path = "../data/input/html";
-std::string g_output_path = "../data/tmp/tmp";
+std::string g_output_path = "../data/tmp/raw_input";
 
 int main()
 {
@@ -26,6 +26,12 @@ int main()
             continue;
         }
         std::cout<<"URL:"<< doc._url <<std::endl;
+        ret =  WriteFile(doc, &g_output_path);
+        if(!ret)
+        {
+            std::cout<< " WriteFile Error"<<std::endl;
+            continue;
+        }
     }
     return 0;
 }

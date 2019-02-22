@@ -100,6 +100,8 @@ bool Parse(const std::string& path, Doc_Info* doc)
         file_text = file_text + one_line;
     }
 
+    file.close();
+
     int ret = ParseTitle(file_text, &(doc->_title));
     if(!ret)
     {
@@ -123,4 +125,23 @@ bool Parse(const std::string& path, Doc_Info* doc)
 
     return true;
 }
+
+bool WriteFile(const Doc_Info& doc,std::string* FilePath )
+{
+    std::ofstream file;
+    file.open(FilePath->c_str(),std::ios::app);
+    if(!file)
+    {
+        std::cout<< "OpenFile Error"<<std::endl;
+        return false;
+    }
+    file << doc._title.c_str();
+    file << '\3';
+    file << doc._conten.c_str();
+    file << '\3';
+    file << doc._url.c_str()<<std::endl;
+    file.close();
+    return true;
+}
+
 
