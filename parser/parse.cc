@@ -24,7 +24,7 @@ int main()
     {
         std::cout<<"Path:"<< path <<std::endl;
 
-        //创建Doc_Info对象来存放单个html文件的标题、正文、以及对应在boost官网中的Url
+        //创建Doc_Info对象来存放单个html文件的标题、正文、以及对应在php官网中的Url
         Doc_Info doc;
 
         //对单个html文件进行解析，将解析的结果以输出参数的形式存放在doc对象中
@@ -34,6 +34,7 @@ int main()
             std::cout<< "Parse Error!" << std::endl;
             continue;
         }
+        std::cout<<"Title:"<< doc._title << std::endl;
         std::cout<<"URL:"<< doc._url <<std::endl;
 
         //当对单个html文件解析完毕后，将解析结果写入至输出文件

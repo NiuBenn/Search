@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>根据给定的格式解析日期时间字符串</title>
+<link media="all" rel="stylesheet" type="text/css" href="styles/03e73060321a0a848018724a6c83de7f-theme-medium.css" />
+
+ </head>
+ <body class="docs"><div class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <ul class="nav" style="width: 100%">
+      <li style="float: left;"><a href="datetime.construct.html">« DateTime::__construct</a></li>
+      <li style="float: right;"><a href="datetime.getlasterrors.html">DateTime::getLastErrors »</a></li>
+    </ul>
+  </div>
+</div>
+<div id="breadcrumbs" class="clearfix">
+  <ul class="breadcrumbs-container">
+    <li><a href="index.html">PHP Manual</a></li>
+    <li><a href="class.datetime.html">DateTime</a></li>
+    <li>根据给定的格式解析日期时间字符串</li>
+  </ul>
+</div>
+<div id="layout">
+  <div id="layout-content"><div id="datetime.createfromformat" class="refentry">
+ <div class="refnamediv">
+  <h1 class="refname">DateTime::createFromFormat</h1>
+  <h1 class="refname">date_create_from_format</h1>
+  <p class="verinfo">(PHP 5 &gt;= 5.3.0, PHP 7)</p><p class="refpurpose"><span class="refname">DateTime::createFromFormat</span> -- <span class="refname">date_create_from_format</span> &mdash; <span class="dc-title">根据给定的格式解析日期时间字符串</span></p>
+
+ </div>
+
+ <div class="refsect1 description" id="refsect1-datetime.createfromformat-description">
+  <h3 class="title">说明</h3>
+  <p class="para">面向对象风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="modifier">public</span> <span class="modifier">static</span> <span class="methodname"><strong>DateTime::createFromFormat</strong></span>
+    ( <span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>
+   , <span class="methodparam"><span class="type">string</span> <code class="parameter">$time</code></span>
+   [, <span class="methodparam"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span> <code class="parameter">$timezone</code></span>
+  ] ) : <span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span></div>
+
+  <p class="para rdfs-comment">过程化风格</p>
+  <div class="methodsynopsis dc-description">
+   <span class="methodname"><a href="function.date-create-from-format.html" class="methodname">date_create_from_format</a></span>
+    ( <span class="methodparam"><span class="type">string</span> <code class="parameter">$format</code></span>
+   , <span class="methodparam"><span class="type">string</span> <code class="parameter">$time</code></span>
+   [, <span class="methodparam"><span class="type"><a href="class.datetimezone.html" class="type DateTimeZone">DateTimeZone</a></span> <code class="parameter">$timezone</code></span>
+  ] ) : <span class="type"><a href="class.datetime.html" class="type DateTime">DateTime</a></span></div>
+
+  <p class="para rdfs-comment">
+   将 <code class="parameter">time</code> 参数给定的日期时间字符串，
+   根据 <code class="parameter">format</code> 参数给定的格式
+   解析为一个新的 DateTime 对象。
+  </p>
+ </div>
+
+
+ <div class="refsect1 parameters" id="refsect1-datetime.createfromformat-parameters">
+  <h3 class="title">参数</h3>
+  <dl>
+
+   
+    <dt>
+<code class="parameter">format</code></dt>
+
+    <dd>
+
+     <p class="para">
+      在解析日期时间字符串的时候使用的格式 <span class="type"><a href="language.types.string.html" class="type string">string</a></span>。
+      参加下列的格式清单。
+      大部分格式和 <span class="function"><a href="function.date.html" class="function">date()</a></span> 函数中的格式是一致的。
+     </p>
+     <p class="para">
+      <table class="doctable table">
+       <caption><strong><code class="parameter">format</code> 
+       参数中支持的字符</strong></caption>
+       
+        <thead>
+         <tr>
+          <th><code class="parameter">format</code> 中的字符</th>
+          <th>解释</th>
+          <th>示例</th>
+         </tr>
+
+        </thead>
+
+        <tbody class="tbody">
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">日</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em>d</em> 和 <em>j</em></td>
+          <td>一个月中的第几天，2 位数字表示，有前导 0 或者无前导 0</td>
+          <td>
+           <em>01</em> 到 <em>31</em> 或者
+           <em>1</em> 到 <em>31</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>D</em> 和 <em>l</em></td>
+          <td>星期几的文字表示</td>
+          <td>
+           <em>Mon</em> 到 <em>Sun</em> 或者
+           <em>Sunday</em> 到 <em>Saturday</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>S</em></td>
+          <td>2 个字母表示的一个月中的第几天（序数词），
+          在进行解析的时候会被忽略</td>
+          <td>
+           <em>st</em>，<em>nd</em>，<em>rd</em> 或者
+           <em>th</em>。
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>z</em></td>
+          <td>一年中的第几天，从 0 开始</td>
+          <td><em>0</em> 到 <em>365</em></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">月</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em>F</em> 和 <em>M</em></td>
+          <td>文本表示的月份，例如 January 或者 Sept</td>
+          <td>
+           <em>January</em> 到 <em>December</em> 或者
+           <em>Jan</em> 到 <em>Dec</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>m</em> 和 <em>n</em></td>
+          <td>数值表示的月份，有前导 0 或者无前导 0</td>
+          <td>
+           <em>01</em> 到 <em>12</em> or
+           <em>1</em> 到 <em>12</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">年</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em>Y</em></td>
+          <td>4 位数字表示的年</td>
+          <td>例如：<em>1999</em> 或 <em>2003</em></td>
+         </tr>
+
+         <tr>
+          <td><em>y</em></td>
+          <td>
+           2 位数字表示的年，
+           可用的范围是 1970 至 2069（不含）
+          </td>
+          <td>
+           例如：
+           <em>99</em> 或 <em>03</em>
+           （表示 <em>1999</em> 和
+           <em>2003</em>）
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">时间</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em>a</em> 和 <em>A</em></td>
+          <td>上午、下午</td>
+          <td><em>am</em> 或 <em>pm</em></td>
+         </tr>
+
+         <tr>
+          <td><em>g</em> and <em>h</em></td>
+          <td>12 小时制的小时，有前导 0 或者无前导 0</td>
+          <td>
+           <em>1</em> 到 <em>12</em> 或者
+           <em>01</em> 到 <em>12</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>G</em> 和 <em>H</em></td>
+          <td>24 小时制的小时，有前导 0 或者无前导 0</td>
+          <td>
+           <em>0</em> 到 <em>23</em> 或
+           <em>00</em> 到 <em>23</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>i</em></td>
+          <td>分钟，有前导 0</td>
+          <td><em>00</em> 到 <em>59</em></td>
+         </tr>
+
+         <tr>
+          <td><em>s</em></td>
+          <td>秒，有前导 0</td>
+          <td><em>00</em> 到 <em>59</em></td>
+         </tr>
+
+         <tr>
+          <td><em>u</em></td>
+          <td>微秒，最多到 6 位数字</td>
+          <td>示例：<em>45</em>，<em>654321</em></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">时区</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td>
+           <em>e</em>，<em>O</em>,
+           <em>P</em> 和 <em>T</em>
+          </td>
+          <td>时区名称，或者是以 UTC 时区为基准的小时偏移量，
+           或者是以 UTC 为基准的小时和分钟的偏移量，
+           小时和分钟之间用冒号（:）分隔。
+           </td>
+          <td>示例：<em>UTC</em>，<em>GMT</em>，
+           <em>Atlantic/Azores</em> 或 
+           <em>+0200</em> 或 <em>+02:00</em> 或
+           <em>EST</em>，<em>MDT</em>
+          </td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">完整的日期和时间</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em>U</em></td>
+          <td>从 Unix Epoch (January 1 1970 00:00:00 GMT) 开始计算的时间，以秒为单位</td>
+          <td>示例：<em>1292177455</em></td>
+         </tr>
+
+         <tr>
+          <td style="text-align: center;"><em class="emphasis">空白字符和分隔字符</em></td>
+          <td>---</td>
+          <td>---</td>
+         </tr>
+
+         <tr>
+          <td><em> </em> （空格）</td>
+          <td>一个空格字符或者一个 tab 字符</td>
+          <td>示例：<em> </em></td>
+         </tr>
+
+         <tr>
+          <td><em>#</em></td>
+          <td>
+           可以是一下分隔符号中的任意一个： <em>;</em>，
+           <em>:</em>，<em>/</em>，<em>.</em>，
+           <em>,</em>，<em>-</em>，<em>(</em> 或
+           <em>)</em>
+          </td>
+          <td>示例：<em>/</em></td>
+         </tr>
+
+         <tr>
+          <td>
+           <em>;</em>，
+           <em>:</em>，<em>/</em>，<em>.</em>，
+           <em>,</em>，<em>-</em>，<em>(</em> 或
+           <em>)</em>
+          </td>
+          <td>特殊字符</td>
+          <td>示例：<em>-</em></td>
+         </tr>
+
+         <tr>
+          <td><em>?</em></td>
+          <td>随机字节</td>
+          <td>示例：<em>^</em> （需要注意的是，
+          对于 UTF-8 字符，可能会需要多个 <em>?</em>。
+          这种情况下，请使用 <em>*</em>）
+          </td>
+         </tr>
+
+         <tr>
+          <td><em>*</em></td>
+          <td>随机字节，直到遇到下一个有效的分隔符号或者数值</td>
+          <td>示例：使用 <em>Y-*-d</em> 格式用来解析 <em>2009-aWord-08</em> 字符串的时候，
+          <em>*</em> 会匹配
+          <em>aWord</em></td>
+         </tr>
+
+         <tr>
+          <td><em>!</em></td>
+          <td>
+          将所有的字段（年、月、日、时、分、秒、微秒以及时区）重置到 Unix Epoch 时间。</td>
+          <td>如果不使用 <em>!,</em> 格式，
+           那么所有的字段会被设置为系统当前的日期和时间。</td>
+         </tr>
+
+         <tr>
+          <td><em>|</em></td>
+          <td>将尚未被解析的字段，也即格式字符串中未明确指定的字段
+           （年、月、日、时、分、秒、微秒以及时区）
+           重置到 Unix Epoch 时间。</td>
+          <td><em>Y-m-d|</em> 
+           会解析日期时间字符串中的年、月和日，
+          但是对于时、分、秒字段会设置为 0.</td>
+         </tr>
+
+         <tr>
+          <td><em>+</em></td>
+          <td>在格式字符串中使用这个格式表示字符，
+          并且所提供的日期时间字符串中包含除了格式字符之外的其他数据的话，不会发出一个错误，而是发出一个警告。</td>
+          <td>使用 <span class="methodname"><a href="datetime.getlasterrors.html" class="methodname">DateTime::getLastErrors()</a></span> 方法
+           来检测所给定的日期时间字符串中是否包含格式字符串指定的内容之外的数据。</td>
+         </tr>
+
+        </tbody>
+       
+      </table>
+
+     </p>
+     <p class="para">
+      如果在格式字符串中包含不可识别的字符，
+      那么会导致解析失败，并且在返回的结构中附加一个错误信息。
+      可以通过 <span class="methodname"><a href="datetime.getlasterrors.html" class="methodname">DateTime::getLastErrors()</a></span>
+      来探查解析是否存在错误。
+     </p>       
+     <p class="para">
+      如果需要在格式字符串 <code class="parameter">format</code> 参数中使用
+      上述表示格式的字符作为一个普通字符，请对其使用反斜线（<em>\</em>）进行转义。
+     </p>
+     <p class="para">
+      如果格式字符串参数 <code class="parameter">format</code> 
+      中不包含 <em>!</em> 字符，
+      那么没有在 <code class="parameter">format</code> 参数中指明的字段，
+      在解析结果中将会被设置为系统当前时间对应的字段值。
+     </p>
+     <p class="para">
+      如果格式字符串参数 <code class="parameter">format</code> 
+      包含了 <em>!</em> 字符，
+      那么没有在 <code class="parameter">format</code> 参数中指明的字段，
+      以及在 <em>!</em> 左侧对应的字段，
+      在解析结果中将会被设置为 Unix epoch 时间对应的字段。
+     </p>
+     <p class="para">
+      The Unix epoch 为 1970-01-01 00:00:00 UTC。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">time</code></dt>
+
+    <dd>
+
+     <p class="para">
+      用来表示日期时间的字符串。
+     </p>
+    </dd>
+
+   
+   
+    <dt>
+<code class="parameter">timezone</code></dt>
+
+    <dd>
+
+     <p class="para">
+      <a href="class.datetimezone.html" class="classname">DateTimeZone</a> 对象，
+      表示在解析日期时间字符串的时候需要使用的时区。
+     </p>
+     <p class="para">
+      如果忽略 <code class="parameter">timezone</code> 参数，
+      并且表示日期时间的字符串 <code class="parameter">time</code> 中也不包含时区信息，
+      那么将会使用系统当前时区作为解析结果对象的时区。
+     </p>
+     <blockquote class="note"><p><strong class="note">Note</strong>: 
+      <p class="para">
+       如果 <code class="parameter">time</code> 参数
+       是 UNIX 时间戳格式（例如：<em>946684800</em>），
+       或者其中已经包含了时区信息（例如：<em>2010-01-28T15:00:00+02:00</em>），
+       那么 <code class="parameter">timezone</code> 
+       以及系统当前时区
+       都将会被忽略。
+      </p>
+     </p></blockquote>
+    </dd>
+
+   
+  </dl>
+
+ </div>
+
+
+ <div class="refsect1 returnvalues" id="refsect1-datetime.createfromformat-returnvalues">
+  <h3 class="title">返回值</h3>
+  <p class="para">
+   返回一个 DateTime 对象。 或者在失败时返回 <strong><code>FALSE</code></strong>。
+  </p>
+ </div>
+
+
+ <div class="refsect1 changelog" id="refsect1-datetime.createfromformat-changelog">
+  <h3 class="title">更新日志</h3>
+  <p class="para">
+   <table class="doctable informaltable">
+    
+     <thead>
+      <tr>
+       <th>版本</th>
+       <th>说明</th>
+      </tr>
+
+     </thead>
+
+     <tbody class="tbody">
+      <tr>
+       <td>5.3.9</td>
+       <td>
+        新增 <code class="parameter">format</code> 格式字符串中对于 + 格式字符的支持。
+       </td>
+      </tr>
+
+     </tbody>
+    
+   </table>
+
+  </p>
+ </div>
+
+
+ <div class="refsect1 examples" id="refsect1-datetime.createfromformat-examples">
+  <h3 class="title">范例</h3>
+  <div class="example" id="example-2657">
+   <p><strong>Example #1 <span class="function"><strong>DateTime::createFromFormat()</strong></span> 例程</strong></p>
+   <div class="example-contents"><p>面向对象风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #DD0000">'j-M-Y'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15-Feb-2009'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>过程化风格</p></div>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br />$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">date_create_from_format</span><span style="color: #007700">(</span><span style="color: #DD0000">'j-M-Y'</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15-Feb-2009'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #0000BB">date_format</span><span style="color: #007700">(</span><span style="color: #0000BB">$date</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上例程会输出：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+2009-02-15
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="example-2658">
+   <p><strong>Example #2 <span class="function"><strong>DateTime::createFromFormat()</strong></span> 的复杂用法</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #DD0000">'Current&nbsp;time:&nbsp;'&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">date</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-d'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15&nbsp;15:16:17'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'Y-m-!d&nbsp;H:i:s'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'2009-02-15&nbsp;15:16:17'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /><br /></span><span style="color: #0000BB">$format&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #DD0000">'!d'</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">$date&nbsp;</span><span style="color: #007700">=&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #0000BB">$format</span><span style="color: #007700">,&nbsp;</span><span style="color: #DD0000">'15'</span><span style="color: #007700">);<br />echo&nbsp;</span><span style="color: #DD0000">"Format:&nbsp;</span><span style="color: #0000BB">$format</span><span style="color: #DD0000">;&nbsp;"&nbsp;</span><span style="color: #007700">.&nbsp;</span><span style="color: #0000BB">$date</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'Y-m-d&nbsp;H:i:s'</span><span style="color: #007700">)&nbsp;.&nbsp;</span><span style="color: #DD0000">"\n"</span><span style="color: #007700">;<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+Current time: 2010-04-23 10:29:35
+Format: Y-m-d; 2009-02-15 10:29:35
+Format: Y-m-d H:i:s; 2009-02-15 15:16:17
+Format: Y-m-!d H:i:s; 1970-01-15 15:16:17
+Format: !d; 1970-01-15 00:00:00
+</pre></div>
+   </div>
+  </div>
+  <div class="example" id="example-2659">
+   <p><strong>Example #3 格式化字符串中包含了需要进行转义的字符</strong></p>
+   <div class="example-contents">
+<div class="phpcode"><code><span style="color: #000000">
+<span style="color: #0000BB">&lt;?php<br /></span><span style="color: #007700">echo&nbsp;</span><span style="color: #0000BB">DateTime</span><span style="color: #007700">::</span><span style="color: #0000BB">createFromFormat</span><span style="color: #007700">(</span><span style="color: #DD0000">'H\h&nbsp;i\m&nbsp;s\s'</span><span style="color: #007700">,</span><span style="color: #DD0000">'23h&nbsp;15m&nbsp;03s'</span><span style="color: #007700">)-&gt;</span><span style="color: #0000BB">format</span><span style="color: #007700">(</span><span style="color: #DD0000">'H:i:s'</span><span style="color: #007700">);<br /></span><span style="color: #0000BB">?&gt;</span>
+</span>
+</code></div>
+   </div>
+
+   <div class="example-contents"><p>以上例程的输出类似于：</p></div>
+   <div class="example-contents screen">
+<div class="cdata"><pre>
+23:15:03
+</pre></div>
+   </div>
+  </div>
+ </div>
+
+
+ <div class="refsect1 seealso" id="refsect1-datetime.createfromformat-seealso">
+  <h3 class="title">参见</h3>
+  <ul class="simplelist">
+   <li class="member"><span class="function"><a href="datetime.construct.html" class="function" rel="rdfs-seeAlso">DateTime::__construct()</a> - 返回一个新的 DateTime 对象</span></li>
+   <li class="member"><span class="function"><a href="datetime.getlasterrors.html" class="function" rel="rdfs-seeAlso">DateTime::getLastErrors()</a> - 获取警告和错误信息</span></li>
+   <li class="member"><span class="function"><a href="function.checkdate.html" class="function" rel="rdfs-seeAlso">checkdate()</a> - 验证一个格里高里日期</span></li>
+   <li class="member"><span class="function"><a href="function.strptime.html" class="function" rel="rdfs-seeAlso">strptime()</a> - 解析由 strftime 生成的日期／时间</span></li>
+  </ul>
+ </div>
+
+</div></div></div></body></html>

@@ -11,7 +11,7 @@ namespace fs = boost::filesystem;
 
 //我们可以通过观察搜狗、谷歌等钩锁引擎的搜索结果
 //基本上搜索结果里面都包含着这三部分内容：标题、正文的摘要、以及URL
-//所以定义Doc_Info对象，用来存放htlm文件中的标题、正文、以及对应在boost官网中的URL
+//所以定义Doc_Info对象，用来存放htlm文件中的标题、正文、以及对应在php官网中的URL
 
 struct Doc_Info{
     std::string _title;
@@ -106,11 +106,16 @@ bool ParseConten(const std::string& file_text, std::string* conten)
 //解析Url，
 bool ParseUrl(const std::string& file_path, std::string* Url)
 {
-    //通过观察我们可以发现，boost库中的URL与我们input文件目录之间有一定的关系
-    //通过对我们file_path的裁剪拼接我们就可以得到对应在boost官网中的URL
+    //通过观察我们可以发现，php官方文档中的URL与我们input文件目录之间有一定的关系
+    //通过对我们file_path的裁剪拼接我们就可以得到对应在php官网中的URL
     //
-    *Url = *Url + "https://www.boost.org/doc/libs/1_69_0/doc/";
-    *Url = *Url + file_path.substr(strlen("../data/input/"));
+    *Url = *Url + "http://php.net/manual/zh/";
+    *Url = *Url + file_path.substr(strlen("../data/input/html/"));
+    (*Url).pop_back();
+    size_t size = (*Url).size();
+    (*Url)[size-3] = 'p';
+    (*Url)[size-2] = 'h';
+    (*Url)[size-1] = 'p';
     return true;
 }
 
@@ -120,9 +125,9 @@ bool Parse(const std::string& path, Doc_Info* doc)
     //这部分是对html文件内容进行一个解析
     //这一模块可以分为4大部分
     //1、通过path路径我们对对应的html文件进行读取，将htlm中的所有内容读取出来，以便后续的处理
-    //2、从读取的内容中解析出对应boost官网中html页面的文档标题
+    //2、从读取的内容中解析出对应php官网中html页面的文档标题
     //3、去掉读到的html内容中的注释、html标签、保留有用的文本信息
-    //4、构建出对应boost官网中对应文档的URL
+    //4、构建出对应php官网中对应文档的URL
 
     std::ifstream file(path.c_str());
     std::string file_text;
