@@ -1,11 +1,5 @@
 #include"parse.hpp"
 
-struct Doc_Info{
-    std::string _title;
-    std::string _text;
-    std::string _url;
-};
-
 std::string g_input_path = "../data/input/html";
 std::string g_output_path = "../data/tmp/tmp";
 
@@ -14,7 +8,7 @@ int main()
     bool ret = false;
     std::vector<std::string> FileList;
 
-    ret = Tools::EnumFile(g_input_path, &FileList);
+    ret = EnumFile(g_input_path, &FileList);
     if(!ret)
     {
         std::cout<< "EnumFile Error!" << std::endl;
@@ -23,7 +17,7 @@ int main()
 
     for( const auto& path : FileList)
     {
-        std::cout<<path<<std::endl;
+        std::cout<<"Path:"<< path <<std::endl;
         Doc_Info doc;
         ret = Parse(path, &doc);
         if(!ret)
@@ -31,6 +25,7 @@ int main()
             std::cout<< "Parse Error!" << std::endl;
             continue;
         }
+        std::cout<<"URL:"<< doc._url <<std::endl;
     }
     return 0;
 }

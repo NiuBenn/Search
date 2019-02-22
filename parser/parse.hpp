@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<fstream>
 #include<string>
 #include<vector>
 #include<boost/filesystem/operations.hpp>
@@ -12,7 +13,6 @@ struct Doc_Info{
     std::string _conten;
     std::string _url;
 };
-
 
 bool EnumFile(const std::string& file_path, std::vector<std::string>* File_List)
 {
@@ -56,13 +56,38 @@ bool ParseTitle(const std::string& file_text, std::string* title)
 
 bool ParseConten(const std::string& file_text, std::string* conten)
 {
+    bool Flag = true;
+    for(auto &c : file_text)
+    {
+        if(c == '<')
+        {
+            Flag = false;
+            continue;
+        }
+        else if(c == '>')
+        {
+            Flag = true;
+            continue;
+        }
+        else if(Flag)
+        {
+            conten->push_back(c);
+        }
+    }
+    return true;
+}
 
+bool ParseUrl(const std::string& file_path, std::string* Url)
+{
+    *Url = *Url + "https://www.boost.org/doc/libs/1_69_0/doc/";
+    *Url = *Url + file_path.substr(strlen("../data/input/"));
+    return true;
 }
 
 
-bool Parse(std::string path, Doc_Info* doc)
+bool Parse(const std::string& path, Doc_Info* doc)
 {
-    std::ifstream file(path);
+    std::ifstream file(path.c_str());
     std::string file_text;
     std::string one_line;
     if(!file.is_open())
@@ -75,7 +100,7 @@ bool Parse(std::string path, Doc_Info* doc)
         file_text = file_text + one_line;
     }
 
-    ret = ParseTitle(file_text, &(doc->_title));
+    int ret = ParseTitle(file_text, &(doc->_title));
     if(!ret)
     {
         std::cout<<"ParseTitle error"<<std::endl;
