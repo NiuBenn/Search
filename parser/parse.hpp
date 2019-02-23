@@ -81,10 +81,13 @@ bool ParseConten(const std::string& file_text, std::string* conten)
     //去注释以及标签的方法：我们不难发现在html中这些没有“意义的字符串”都是被'<' 和 '>' 包裹在中间
     //所以我们要去注释就会很简单，将<>之间的内容舍弃，将其他内容提取至conten中
     //这样就完成了我们对于正文的初步处理
+    size_t pos = file_text.find("</title>");
+    pos += strlen("</title>");
 
     bool Flag = true;
-    for(auto &c : file_text)
+    for(size_t i = pos; i < file_text.size(); ++i)
     {
+        char c = file_text[i];
         if(c == '<')
         {
             Flag = false;
@@ -93,11 +96,22 @@ bool ParseConten(const std::string& file_text, std::string* conten)
         else if(c == '>')
         {
             Flag = true;
+            if(conten->back() != ' ')
+                conten->push_back(' ');
             continue;
         }
         else if(Flag)
         {
-            conten->push_back(c);
+        
+            if(c <= 32)
+            {
+                if(conten->back() != ' ')
+                    conten->push_back(' ');
+            }
+            else
+            {
+                conten->push_back(c);
+            }
         }
     }
     return true;
@@ -141,7 +155,7 @@ bool Parse(const std::string& path, Doc_Info* doc)
     //循环按行读取html文件中的内容
     while(std::getline(file,one_line))
     {
-        file_text = file_text + one_line;
+        file_text = file_text + one_line + ' ';
     }
 
     //对文件操作完毕后记得关闭
