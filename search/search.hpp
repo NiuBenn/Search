@@ -22,12 +22,19 @@ struct Doc_Info
     std::string _url;
 };
 
+
 struct Weight
 {
     uint32_t _weight;
     uint32_t _doc_id;
     std::string _word;
 };
+
+
+bool cmp(std::pair<uint32_t, uint32_t> a, std::pair<uint32_t, uint32_t> b)
+{
+    return a.second > b.second;
+}
 
 class Index
 {
@@ -106,6 +113,48 @@ public:
         return true;
     }
 
+
+    void MakeRDoc(uint32_t doc_id, Doc_Info* doc)
+    {
+        doc->_id = doc_id;
+        doc->_title = Forword_Index[doc_id]._title;
+        doc->_conten = Forword_Index[doc_id]._conten.substr(0, 140) + "...";
+        doc->_url = Forword_Index[doc_id]._url;
+    }
+
+    void Search(const std::string& query, std::vector<Doc_Info>* doc_v)
+    {
+        std::vector<std::string> words;
+        CutString(query, &words);
+        std::map<uint32_t , uint32_t> result;
+        for(const auto& word : words)
+        {
+            if(word=="_"||word==" "||word==";"||word=="?"||word==":"||word=="."||word==","||word=="/"||word=="*"||word=="$"||word=="["||word=="]"||word=="("||word==")")
+                continue;
+            if(InvertedIndex.count(word) < 0)
+                continue;
+            for(const auto& wei : InvertedIndex[word])
+            {
+                result[wei._doc_id] += wei._weight;
+            }
+        }
+
+        std::vector<std::pair<uint32_t, uint32_t>> doc;
+        for(const auto& r : result)
+        {
+            doc.push_back(r);
+        }
+
+        sort(doc.begin(), doc.end(), cmp);
+        for( const auto& d : doc)
+        {
+            Doc_Info DocObject;
+            MakeRDoc(d.first, &DocObject);
+            doc_v->push_back(DocObject);
+        }
+    }
+
+
     Index():jieba(DICT_PATH,HMM_PATH,USER_DICT_PATH,IDF_PATH,STOP_WORD_PATH)
     {}
 
@@ -130,12 +179,14 @@ public:
             std::cout<<"Build Error!!"<<std::endl;
             return false;
         }
-
-
         return true;
+    }
+
+    void Search(const std::string& query, std::vector<Doc_Info>* doc_v)
+    {
+        _index->Search(query, doc_v);
     }
 
 private:
     Index* _index;
-
 };
