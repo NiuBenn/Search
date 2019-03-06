@@ -5,6 +5,7 @@
 #include<string>
 #include<vector>
 #include<map>
+#include<jsoncpp/json/json.h>
 #include<boost/algorithm/string.hpp>
 #include "cppjieba/Jieba.hpp"
 
@@ -182,9 +183,23 @@ public:
         return true;
     }
 
-    void Search(const std::string& query, std::vector<Doc_Info>* doc_v)
+    bool Search(const std::string& query, std::string* json_result)
     {
-        _index->Search(query, doc_v);
+        Json::Value results;
+        std::vector<Doc_Info> doc_v;
+        _index->Search(query, &doc_v);
+        
+        for(auto doc : doc_v)
+        {
+            Json::Value result;
+            result["title"] = doc._title;
+            result["desc"] = doc._conten;
+            result["url"] = doc._url;
+            results.append(result);
+        }
+        Json::FastWriter writer;
+        *json_result = writer.write(results);
+        return true;
     }
 
 private:

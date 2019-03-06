@@ -15,13 +15,14 @@ int main()
     std::cout<<"Init Succes!!"<<std::endl;
 
     std::vector<Doc_Info> doc_v;
-    s.Search("配置文件", &doc_v);
-    for(const auto& d : doc_v)
-    {
-        std::cout<<"Title: "<<d._title<<std::endl;
-        std::cout<<"Conten: "<<d._conten<<std::endl;
-        std::cout<<"Url: "<<d._url<<std::endl<<std::endl;
-    }
+    std::cout<<"请输入搜索内容：";
+    std::string str;
+    std::string json_result;
+    std::cin>>str;
+
+    s.Search("配置文件", &json_result);
+
+    std::cout<<json_result<<std::endl;
 
     return 0;
 }
