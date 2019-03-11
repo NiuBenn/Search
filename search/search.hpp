@@ -107,10 +107,10 @@ public:
 
             count++;
             if(count%500 == 0)
-                std::cout<<"Build："<< count <<std::endl;
+                std::cout << "Build："<< count <<std::endl;
 
         }
-
+        std::cout << "Build Finish" << std::endl;
         return true;
     }
 
@@ -188,7 +188,7 @@ public:
         Json::Value results;
         std::vector<Doc_Info> doc_v;
         _index->Search(query, &doc_v);
-        
+        int count = 0;
         for(auto doc : doc_v)
         {
             Json::Value result;
@@ -196,6 +196,9 @@ public:
             result["desc"] = doc._conten;
             result["url"] = doc._url;
             results.append(result);
+            count++;
+            if(count >= 20)
+                break;
         }
         Json::FastWriter writer;
         *json_result = writer.write(results);

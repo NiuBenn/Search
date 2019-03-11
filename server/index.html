@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面任何其他内容都*必须*跟随其后！ -->
     <link type="favicon" rel="shortcut icon" href="favicon.ico" />
-		<title>Boost 文档搜索</title>
+		<title>PHP官方帮助文档搜索</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +62,7 @@
 		<nav class="navbar navbar-inverse navbar-fixed-top" >
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/index.html">Boost文档搜索</a>
+          <a class="navbar-brand" href="/index.html">PHP官方帮助文档搜索</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-left search_input" id="input" onsubmit="return false">
@@ -114,7 +114,7 @@
 				})
 
 				$("#submit").click(function(){
-					var url = "/searcher?query=" + input.searchString;
+					var url = "/search?query=" + input.searchString;
 					htmlobj=$.ajax({url:url, async:false});
 					output.results = JSON.parse(htmlobj.responseText) || [];
 				});
