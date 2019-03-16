@@ -103,7 +103,7 @@ bool ParseConten(const std::string& file_text, std::string* conten)
         else if(Flag)
         {
         
-            if(c <= 32)
+            if(c == ' ')
             {
                 if(conten->back() != ' ')
                     conten->push_back(' ');

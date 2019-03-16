@@ -85,7 +85,7 @@ public:
             {
                 if(word=="_"||word==" "||word==";"||word=="?"||word==":"||word=="."||word==","||word=="/"||word=="*"||word=="$"||word=="["||word=="]"||word=="("||word==")")
                     continue;
-                tmp[word] += 6;
+                tmp[word] += 20;
             }
 
             for(const auto& word : ContenWords)
@@ -115,12 +115,22 @@ public:
     }
 
 
-    void MakeRDoc(uint32_t doc_id, Doc_Info* doc)
+    void MakeRDoc(uint32_t doc_id, Doc_Info* doc, std::vector<std::string>& words)
     {
         doc->_id = doc_id;
         doc->_title = Forword_Index[doc_id]._title;
-        doc->_conten = Forword_Index[doc_id]._conten.substr(0, 140) + "...";
         doc->_url = Forword_Index[doc_id]._url;
+        for(auto word : words)
+        {
+            if(word=="_"||word==" "||word==";"||word=="?"||word==":"||word=="."||word==","||word=="/"||word=="*"||word=="$"||word=="["||word=="]"||word=="("||word==")")
+                continue;
+            int pos = Forword_Index[doc_id]._conten.find(word);
+            if(pos == std::string::npos)
+                continue;
+            doc->_conten = Forword_Index[doc_id]._conten.substr((pos-20>0?pos-20:0), 140) + "...";
+            return;
+        }
+        doc->_conten = Forword_Index[doc_id]._conten.substr(0, 140) + "...";
     }
 
     void Search(const std::string& query, std::vector<Doc_Info>* doc_v)
@@ -150,7 +160,7 @@ public:
         for( const auto& d : doc)
         {
             Doc_Info DocObject;
-            MakeRDoc(d.first, &DocObject);
+            MakeRDoc(d.first, &DocObject, words);
             doc_v->push_back(DocObject);
         }
     }
@@ -197,7 +207,7 @@ public:
             result["url"] = doc._url;
             results.append(result);
             count++;
-            if(count >= 20)
+            if(count >= 99)
                 break;
         }
         Json::FastWriter writer;
