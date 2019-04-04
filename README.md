@@ -1,5 +1,5 @@
 # Search
-[用于php官方网站文档检索的小型搜索引擎](http://39.96.48.21:9000/index.html)
+[php官方网站帮助文档搜索](http://39.96.48.21:9000/index.html)
 
 data: input 用于存放 html 文件, output 用于存放解析后数据
 parser: 用于对html原始文件解析
